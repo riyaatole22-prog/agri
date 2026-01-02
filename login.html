@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>पोर्टल लॉगिन | ई-कृषि</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --glass-white: rgba(255, 255, 255, 0.15); /* Transparency */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        /* --- Glassmorphism Card --- */
+        .login-card {
+            background: var(--glass-white);
+            padding: 40px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(15px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .govt-logo {
+            width: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .login-card h2 {
+            font-size: 26px;
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .login-card p {
+            color: #f1f5f9;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Input Styling --- */
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-box i.main-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #475569;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 45px 14px 50px; /* Right padding increased for toggle */
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        /* Show/Hide Toggle Styling */
+        .toggle-password {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #64748b;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .toggle-password:hover {
+            color: var(--primary-green);
+        }
+
+        /* --- Buttons & Links --- */
+        .login-btn {
+            width: 100%;
+            background: var(--primary-green);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .links-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .links-row a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .register-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .register-footer a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .govt-footer {
+    background: #1e293b;
+    color: #f8fafc;
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    margin-top: auto; /* Pushes footer to bottom */
+    border-top: 4px solid #b38b1d; /* Official Gold Accent */
+}
+
+.footer-main {
+    padding: 50px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    height: 60px;
+    filter: brightness(0) invert(1); /* Makes emblem white */
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #22c55e;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #22c55e;
+    padding-left: 5px;
+}
+
+.external-logos {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.external-logos img {
+    height: 35px;
+    background: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    background: #0f172a;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 5px 0;
+}
+
+/* Fix for Transparent Pages (Login/Register) */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="govt-logo">
+        
+        <h2>पोर्टल लॉगिन</h2>
+        <p>अपने डिजिटल कृषि खाते में प्रवेश करें</p>
+
+        <form action="home.html">
+            <div class="input-box">
+                <i class="fas fa-phone-alt main-icon"></i>
+                <input type="tel" placeholder="मोबाइल नंबर" required>
+            </div>
+
+            <div class="input-box">
+                <i class="fas fa-lock main-icon"></i>
+                <input type="password" id="password" placeholder="पासवर्ड" required>
+                <i class="fas fa-eye toggle-password" id="toggleEye"></i>
+            </div>
+
+            <button type="submit" class="login-btn">लॉगिन करें</button>
+
+            <div class="links-row">
+                <a href="#">पासवर्ड भूल गए?</a>
+                <a href="#">OTP से लॉगिन</a>
+            </div>
+        </form>
+
+        <div class="register-footer">
+            नया उपयोगकर्ता? <a href="register.html">अभी पंजीकरण करें</a>
+        </div>
+    </div>
+    
+
+    <script>
+        const toggleEye = document.querySelector('#toggleEye');
+        const password = document.querySelector('#password');
+
+        toggleEye.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // toggle the eye / eye-slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+</body>
+</html>

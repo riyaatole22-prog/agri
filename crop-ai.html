@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop AI Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8fafc; font-family: 'Segoe UI', sans-serif; }
+        .banner {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            color: white; padding: 50px 0 90px; text-align: center;
+            border-radius: 0 0 40px 40px;
+        }
+        .main-container { margin-top: -60px; }
+        .glass-card {
+            background: white; border-radius: 20px; border: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            min-height: 600px; padding: 30px;
+        }
+        /* Loader Animation */
+        .loader-wrap { display: none; height: 400px; flex-direction: column; align-items: center; justify-content: center; }
+        .ai-pulse {
+            width: 80px; height: 80px; background: #3b82f6; border-radius: 50%;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        .report-box { display: none; }
+        .res-header { background: #10b981; color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow" style="background: #1e293b; border-bottom: 3px solid #10b981;">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="home.html">
+            <i class="fas fa-seedling text-success me-2 fa-lg"></i>
+            <span style="letter-spacing: 1px;">ई-कृषि <span class="text-success">पोर्टल</span></span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#farmerNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="farmerNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="home.html"><i class="fas fa-home me-1"></i> होम</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="market.html"><i class="fas fa-store me-1"></i> मंडी भाव</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="crop-ai.html"><i class="fas fa-robot me-1"></i> फसल AI</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="weather.html"><i class="fas fa-cloud-sun me-1"></i> मौसम</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="schemes.html"><i class="fas fa-landmark me-1"></i> योजनाएं</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="community.html"><i class="fas fa-users me-1"></i> समुदाय</a>
+                </li>
+                <li class="nav-item px-2 ms-lg-3">
+                    <a class="btn btn-success btn-sm rounded-pill px-4 fw-bold" href="login.html">लॉगआउट</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .sticky-top { top: 0; z-index: 1020; }
+    .nav-link { 
+        transition: 0.3s; 
+        font-size: 0.95rem; 
+        color: rgba(255,255,255,0.85) !important; 
+    }
+    .nav-link:hover { 
+        color: #10b981 !important; 
+        transform: translateY(-2px); 
+    }
+    .navbar-brand:hover { opacity: 0.9; }
+    
+    /* Active Link Styling (Optional: use JavaScript to toggle 'active' class) */
+    .nav-link.active {
+        color: #10b981 !important;
+        font-weight: bold;
+        border-bottom: 2px solid #10b981;
+    }
+    .govt-footer {
+    background: #1e293b;
+    color: #f8fafc;
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    margin-top: auto; /* Pushes footer to bottom */
+    border-top: 4px solid #b38b1d; /* Official Gold Accent */
+}
+
+.footer-main {
+    padding: 50px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    height: 60px;
+    filter: brightness(0) invert(1); /* Makes emblem white */
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #22c55e;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #22c55e;
+    padding-left: 5px;
+}
+
+.external-logos {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.external-logos img {
+    height: 35px;
+    background: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    background: #0f172a;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 5px 0;
+}
+
+/* Fix for Transparent Pages (Login/Register) */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+</style>
+
+<div class="banner">
+    <h2 class="fw-bold">फसल <span class="text-warning">AI</span> सुरक्षा केंद्र</h2>
+    <p>आपकी फसल की सेहत, अब हमारे AI के हाथ</p>
+</div>
+
+<div class="container main-container mb-5">
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="glass-card">
+                <h4 class="mb-4"><i class="fas fa-search-plus text-primary me-2"></i>नया विश्लेषण शुरू करें</h4>
+                
+                <div class="mb-4">
+                    <label class="form-label fw-bold">फसल चुनें</label>
+                    <select class="form-select form-select-lg" id="cropType">
+                        <option value="">-- फसल चुनें --</option>
+                        <option value="wheat">गेहूं (Wheat)</option>
+                        <option value="rice">धान (Rice)</option>
+                        <option value="tomato">टमाटर (Tomato)</option>
+                        <option value="potato">आलू (Potato)</option>
+                        <option value="cotton">कपास (Cotton)</option>
+                        <option value="mustard">सरसों (Mustard)</option>
+                        <option value="sugarcane">गन्ना (Sugarcane)</option>
+                        <option value="onion">प्याज (Onion)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">लक्षण या बीमारी</label>
+                    <select class="form-select form-select-lg" id="diseaseType">
+                        <option value="">-- पहले फसल चुनें --</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-light rounded-3 text-center mb-4" style="border: 2px dashed #cbd5e1; cursor:pointer;" onclick="$('#fInp').click()">
+                    <input type="file" id="fInp" hidden>
+                    <i class="fas fa-camera-retro fa-3x text-muted mb-2"></i>
+                    <p class="mb-0 text-muted">रोगग्रस्त भाग की फोटो अपलोड करें</p>
+                </div>
+
+                <button class="btn btn-primary btn-lg w-100 py-3 rounded-pill shadow" id="runAI">
+                    AI विश्लेषण शुरू करें <i class="fas fa-bolt ms-2 text-warning"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="glass-card" id="displayArea">
+                <div id="init" class="h-100 d-flex flex-column justify-content-center text-center">
+                    <i class="fas fa-robot fa-5x text-light mb-3"></i>
+                    <h5 class="text-muted">रिपोर्ट का स्थान</h5>
+                </div>
+
+                <div class="loader-wrap" id="loading">
+                    <div class="ai-pulse mb-4"></div>
+                    <h4 class="fw-bold">AI स्कैनिंग जारी है...</h4>
+                    <p class="text-muted">उपचार डेटाबेस से मिलान किया जा रहा है</p>
+                </div>
+
+                <div class="report-box" id="report">
+                    <div class="res-header shadow">
+                        <i class="fas fa-file-medical fa-2x mb-2"></i>
+                        <h4 class="mb-0">AI उपचार रिपोर्ट</h4>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-primary px-3 py-2 rounded-pill mb-2">पहचानी गई समस्या</span>
+                        <h5 id="finalD" class="fw-bold text-danger ps-2">--</h5>
+                    </div>
+
+                    <div class="p-4 bg-success bg-opacity-10 border-start border-4 border-success rounded-3">
+                        <h6 class="fw-bold text-success"><i class="fas fa-hand-holding-medical me-2"></i>विशेषज्ञ सलाह:</h6>
+                        <ul class="mb-0 mt-2" id="finalA"></ul>
+                    </div>
+
+                    <button class="btn btn-outline-dark w-100 mt-5 rounded-pill" onclick="location.reload()">
+                        <i class="fas fa-sync-alt me-2"></i>नया टेस्ट
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer class="govt-footer">
+    <div class="footer-main">
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="footer-logo">
+                <p>कृषि एवं किसान कल्याण विभाग, भारत सरकार। हम देश के अन्नदाताओं को तकनीकी रूप से सशक्त बनाने के लिए प्रतिबद्ध हैं।</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>महत्वपूर्ण लिंक</h4>
+                <ul class="footer-links">
+                    <li><a href="home.html">मुख्य पृष्ठ</a></li>
+                    <li><a href="schemes.html">योजनाएं</a></li>
+                    <li><a href="market.html">मंडी भाव</a></li>
+                    <li><a href="community.html">सहायता केंद्र</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>संपर्क विवरण</h4>
+                <p><i class="fas fa-phone"></i> टोल फ्री: 1800-180-1551</p>
+                <p><i class="fas fa-envelope"></i> helpdesk-agri@nic.in</p>
+                <p><i class="fas fa-map-marker-alt"></i> कृषि भवन, नई दिल्ली</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>अन्य पोर्टल</h4>
+                <div class="external-logos">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.NQYsLjWxkJmiM87AyEAFpwHaE8?pid=Api&P=0&h=180" alt="India Gov">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.zujcy2VxfDIfj6OU5YEDmwHaHY?pid=Api&P=0&h=180" alt="MyGov">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-container">
+            <p>&copy; 2026 ई-कृषि पोर्टल | सभी अधिकार सुरक्षित</p>
+            <p>डिज़ाइन और विकसित: <strong>राष्ट्रीय सूचना विज्ञान केंद्र (NIC)</strong></p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Database for dependent dropdowns
+    const db = {
+        wheat: ["पीला रतुआ (Yellow Rust)", "करनाल बंट (Karnal Bunt)", "दीमक (Termites)"],
+        rice: ["झुलसा रोग (Blast)", "तना छेदक (Stem Borer)", "भूरा फुदका (BPH)"],
+        tomato: ["लीफ कर्ल (Leaf Curl)", "अगेती झुलसा (Early Blight)", "फल छेदक"],
+        potato: ["पछेती झुलसा (Late Blight)", "स्कैब (Scab)"],
+        cotton: ["गुलाबी सुंडी (Pink Bollworm)", "सफेद मक्खी"],
+        mustard: ["सफेद रतुआ (White Rust)", "माहू (Aphids)"],
+        sugarcane: ["लाल सड़न (Red Rot)", "पायरीला कीट"],
+        onion: ["बैंगनी धब्बा (Purple Blotch)", "थ्रिप्स"]
+    };
+
+    // Update diseases when crop changes
+    $('#cropType').change(function() {
+        const crop = $(this).val();
+        let options = '<option value="">-- बीमारी चुनें --</option>';
+        if(db[crop]) {
+            db[crop].forEach(d => options += `<option value="${d}">${d}</option>`);
+        }
+        $('#diseaseType').html(options);
+    });
+
+    // AI Logic
+    $('#runAI').click(function() {
+        if(!$('#diseaseType').val()) { alert("पूरी जानकारी भरें!"); return; }
+
+        $('#init').hide();
+        $('#report').hide();
+        $('#loading').css('display', 'flex');
+
+        setTimeout(() => {
+            $('#loading').hide();
+            $('#finalD').text($('#diseaseType').val());
+            
+            // Example Advice
+            $('#finalA').html(`
+                <li>खेत में जलभराव न होने दें।</li>
+                <li>प्रमाणित कीटनाशक का 2ml/लीटर पानी में छिड़काव करें।</li>
+                <li>अगले 48 घंटों तक मौसम पर नजर रखें।</li>
+            `);
+            $('#report').fadeIn();
+        }, 2500);
+    });
+</script>
+</body>
+</html>
