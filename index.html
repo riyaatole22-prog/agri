@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ई-कृषि | डिजिटल कृषि सेवा केंद्र</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; color: #333; overflow-x: hidden; }
+
+        /* --- GOVERNMENT HEADER SECTION --- */
+        .govt-header {
+            background: #fff;
+            padding: 15px 30px;
+            border-bottom: 3px solid #b38b1d; /* Gold border per official style */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .state-emblem {
+            height: 100px;
+            width: auto;
+        }
+
+        .title-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .main-hindi {
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0;
+            color: #000;
+            line-height: 1.2;
+        }
+
+        .main-english {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 2px 0 8px 0;
+            color: #333;
+            letter-spacing: 0.2px;
+        }
+
+        .sub-titles {
+            display: flex;
+            align-items: center;
+        }
+
+        .sub-block {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        .left-border {
+            border-right: 1px solid #888;
+            padding-right: 15px;
+            margin-right: 15px;
+        }
+
+        .campaign-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .campaign-section img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'); 
+            background-size: cover; 
+            background-position: center; 
+            height: 400px;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            text-align: center;
+        }
+        .hero h1 { font-size: 50px; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 20px; margin-top: 10px; }
+        .update-badge { background-color: #10b981; padding: 8px 20px; border-radius: 20px; font-size: 14px; margin-top: 25px; font-weight: bold; }
+        .logout-btn {
+    background-color: #22c55e;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: background 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.logout-btn:hover {
+    background-color: #16a34a;
+    color: white;
+}
+
+/* Ensure the campaign section centers the button with the images */
+.campaign-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+        /* --- SERVICE CARDS --- */
+        .services { display: flex; justify-content: center; gap: 20px; margin-top: -60px; padding: 0 20px; flex-wrap: wrap; }
+        .s-card { 
+            background: white; 
+            padding: 30px 20px; 
+            border-radius: 15px; 
+            width: 180px; 
+            text-align: center; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            transition: transform 0.3s;
+        }
+        .s-card:hover { transform: translateY(-10px); }
+        .s-card i { font-size: 35px; margin-bottom: 15px; display: block; }
+        .s-card h4 { margin: 0; font-size: 18px; color: #1e293b; }
+        /* Removes blue underlines and keeps the original text color */
+.card-link, 
+.card-link:visited, 
+.card-link:hover, 
+.card-link:active {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+/* Ensures the headers inside the cards don't look like links */
+.s-card h4 {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+        /* --- LEADERSHIP SLIDER --- */
+        .leadership-section { padding: 80px 0; text-align: center; background-color: #fff; }
+        
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 40px;
+            padding: 20px 0;
+        }
+
+        .leadership-row {
+            display: flex;
+            gap: 30px;
+            animation: scroll-leadership 40s linear infinite;
+            width: max-content;
+        }
+
+        .slider-container:hover .leadership-row { animation-play-state: paused; }
+
+        .leader-card {
+            background: #f8fafc;
+            min-width: 240px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Fixed Circular Image Logic */
+        .img-circle {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 4px solid #22c55e;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .img-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Forces uniform size regardless of original aspect ratio */
+            object-position: top center;
+        }
+
+        .leader-card h4 { margin: 10px 0 5px; font-size: 18px; color: #1e293b; }
+        .leader-card p { margin: 0; font-size: 14px; color: #3b82f6; font-weight: 700; }
+
+        @keyframes scroll-leadership {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-270px * 6)); } /* Card width + gap * total cards */
+        }
+
+        @media (max-width: 1200px) { .campaign-section { display: none; } }
+        /* GOVT FOOTER STYLING */
+/* GOVT FOOTER STYLING */
+.govt-footer {
+    background: #1e293b;
+    color: #f8fafc;
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    margin-top: auto; /* Pushes footer to bottom */
+    border-top: 4px solid #b38b1d; /* Official Gold Accent */
+}
+
+.footer-main {
+    padding: 50px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    height: 60px;
+    filter: brightness(0) invert(1); /* Makes emblem white */
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #22c55e;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #22c55e;
+    padding-left: 5px;
+}
+
+.external-logos {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.external-logos img {
+    height: 35px;
+    background: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    background: #0f172a;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 5px 0;
+}
+
+/* Fix for Transparent Pages (Login/Register) */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header class="govt-header">
+        <div class="header-container">
+            <div class="brand-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="state-emblem">
+                <div class="title-group">
+                    <h1 class="main-hindi">कृषि एवं किसान कल्याण विभाग</h1>
+                    <h2 class="main-english">DEPARTMENT OF AGRICULTURE & FARMERS WELFARE</h2>
+                    <div class="sub-titles">
+                        <div class="sub-block left-border">
+                            भारत सरकार<br>GOVERNMENT OF INDIA
+                        </div>
+                        <div class="sub-block">
+                            कृषि एवं किसान कल्याण मंत्रालय<br>MINISTRY OF AGRICULTURE & FARMERS WELFARE
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campaign-section">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.GqsxVafi2hK7i7syvNE_DwAAAA?pid=Api&P=0&h=180" alt="Kisaan Call Center">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.AvrAle5yRzcbL_Jo-oSYDQHaEe?pid=Api&P=0&h=180" alt="Swachh Bharat">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.e3N6nkIaNHsr57xIEB-jGAHaEK?pid=Api&P=0&h=180" alt="AKAM">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.U9TsJcJ0bkmDHo4qHWvGIgHaFE?pid=Api&P=0&h=180" alt="G20">
+                <a href="register.html" class="logout-btn">लॉगआउट</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>डिजिटल कृषि सेवा केंद्र</h1>
+        <p>उन्नत तकनीक, खुशहाल किसान</p>
+        <div class="update-badge">2 जनवरी 2026 का अपडेट</div>
+    </section>
+
+   <section class="services">
+    <a href="crop-ai.html" class="card-link">
+        <div class="s-card"><i class="fas fa-robot" style="color:#3b82f6"></i><h4>फसल AI जांच</h4></div>
+    </a>
+    
+    <a href="market.html" class="card-link">
+        <div class="s-card"><i class="fas fa-store" style="color:#f59e0b"></i><h4>मंडी भाव</h4></div>
+    </a>
+
+    <a href="weather.html" class="card-link">
+        <div class="s-card"><i class="fas fa-cloud-sun" style="color:#06b6d4"></i><h4>कृषि मौसम</h4></div>
+    </a>
+
+    <a href="community.html" class="card-link">
+        <div class="s-card"><i class="fas fa-users" style="color:#10b981"></i><h4>किसान चौपाल</h4></div>
+    </a>
+
+    <a href="schemes.html" class="card-link">
+        <div class="s-card"><i class="fas fa-university" style="color:#ef4444"></i><h4>सरकारी योजनाएं</h4></div>
+    </a>
+</section>
+
+    <section class="leadership-section">
+        <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+            <i class="fas fa-users-cog" style="color:#10b981; font-size:28px;"></i>
+            <h2 style="margin:0; font-size:32px;">हमारे कृषि नेतृत्व</h2>
+        </div>
+        <p style="color:#64748b; font-size:16px; margin-top:10px;">भारत सरकार के प्रमुख नेतृत्व जो किसानों की सेवा में समर्पित हैं</p>
+
+         <div class="slider-container">
+            <div class="leadership-row">
+                <div class="leader-card">
+                    <div class="img-circle"><img src="data:image/jpeg;base64,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" alt="Shivraj"></div>
+                    <h4>शिवराज सिंह चौहान</h4><p>कैबिनेट मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkMCz40vdgz7WkJo2Rv5EyPLdtq-N6CbT28g&s" alt="Bhagirath"></div>
+                    <h4>भागीरथ चौधरी</h4><p>राज्य मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIbNGB7nnImu823GctvjqDSe9UDJJL0z46tg&s" alt="Ramnath"></div>
+                    <h4>राम नाथ ठाकुर</h4><p>राज्य मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5T86e1PSywqfHWU8cFW161i-l_W5QTFXiqg&s" alt="Arjun"></div>
+                    <h4>अर्जुन मुंडा</h4><p>पूर्व केंद्रीय मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtNRN04qoJ_EamEyBQO3K0kUCnBzdmWQSpQg&s" alt="Shobha"></div>
+                    <h4>शोभा करंदलाजे</h4><p>पूर्व राज्य मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yh_3Jm63oBBuSyiozugHX2mNTizQCdNUDw&s" alt="Kailash"></div>
+                    <h4>कैलाश चौधरी</h4><p>पूर्व राज्य मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="data:image/jpeg;base64,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" alt="Shivraj"></div>
+                    <h4>शिवराज सिंह चौहान</h4><p>कैबिनेट मंत्री</p>
+                </div>
+                <div class="leader-card">
+                    <div class="img-circle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkMCz40vdgz7WkJo2Rv5EyPLdtq-N6CbT28g&s" alt="Bhagirath"></div>
+                    <h4>भागीरथ चौधरी</h4><p>राज्य मंत्री</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="govt-footer">
+    <div class="footer-main">
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="footer-logo">
+                <p>कृषि एवं किसान कल्याण विभाग, भारत सरकार। हम देश के अन्नदाताओं को तकनीकी रूप से सशक्त बनाने के लिए प्रतिबद्ध हैं।</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>महत्वपूर्ण लिंक</h4>
+                <ul class="footer-links">
+                    <li><a href="home.html">मुख्य पृष्ठ</a></li>
+                    <li><a href="schemes.html">योजनाएं</a></li>
+                    <li><a href="market.html">मंडी भाव</a></li>
+                    <li><a href="community.html">सहायता केंद्र</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>संपर्क विवरण</h4>
+                <p><i class="fas fa-phone"></i> टोल फ्री: 1800-180-1551</p>
+                <p><i class="fas fa-envelope"></i> helpdesk-agri@nic.in</p>
+                <p><i class="fas fa-map-marker-alt"></i> कृषि भवन, नई दिल्ली</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>अन्य पोर्टल</h4>
+                <div class="external-logos">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.NQYsLjWxkJmiM87AyEAFpwHaE8?pid=Api&P=0&h=180" alt="India Gov">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.zujcy2VxfDIfj6OU5YEDmwHaHY?pid=Api&P=0&h=180" alt="MyGov">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-container">
+            <p>&copy; 2026 ई-कृषि पोर्टल | सभी अधिकार सुरक्षित</p>
+            <p>डिज़ाइन और विकसित: <strong>राष्ट्रीय सूचना विज्ञान केंद्र (NIC)</strong></p>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
